@@ -14,16 +14,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingHorizontal="8dp"
+        android:minHeight="56dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="8dp"
         android:gravity="center_vertical">
 
         <Button
             android:id="@+id/btn_angle"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/P.Button.Tonal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/accent"
-            android:textStyle="bold"
+            android:layout_height="36dp"
+            android:minHeight="36dp"
+            android:minWidth="56dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
             android:text="RAD" />
 
         <View
@@ -33,22 +37,16 @@
 
         <Button
             android:id="@+id/btn_graph"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/P.Button.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:textColor="@color/accent"
-            android:textStyle="bold"
             android:text="@string/open_graph" />
 
         <Button
             android:id="@+id/btn_formulas"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/P.Button.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:textColor="@color/accent"
-            android:textStyle="bold"
             android:text="@string/open_formulas" />
     </LinearLayout>
 
@@ -128,33 +126,30 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:minHeight="56dp"
         android:paddingStart="20dp"
         android:paddingEnd="8dp">
 
         <TextView
+            style="@style/P.Text.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/text"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:text="@string/history" />
 
         <Button
             android:id="@+id/btn_clear_history"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/P.Button.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/accent"
             android:text="@string/clear" />
     </LinearLayout>
 
     <TextView
+        style="@style/P.Text.Caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:textColor="@color/text_dim"
-        android:textSize="12sp"
         android:text="@string/history_help" />
 
     <ScrollView
@@ -179,10 +174,10 @@
         android:layout_height="40dp">
 
         <View
-            android:layout_width="48dp"
+            android:layout_width="40dp"
             android:layout_height="5dp"
             android:layout_gravity="center"
-            android:background="@color/text_faint" />
+            android:background="@drawable/grip" />
     </FrameLayout>
 </LinearLayout>
 </FrameLayout>

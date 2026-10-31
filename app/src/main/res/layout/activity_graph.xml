@@ -44,11 +44,11 @@
 
             <Button
                 android:id="@+id/btn_add_fn"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/P.Button.Tonal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textColor="@color/accent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/add_function" />
         </LinearLayout>
     </ScrollView>
