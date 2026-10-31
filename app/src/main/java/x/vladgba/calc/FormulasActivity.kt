@@ -73,7 +73,7 @@ class FormulasActivity : Activity() {
         val inflater = LayoutInflater.from(this)
         formulas.forEachIndexed { i, f ->
             val row = inflater.inflate(R.layout.item_formula, list, false)
-            row.background = roundedBg(color(R.color.card), 16f)
+            row.background = roundedBg(color(R.color.card), 20f)
             row.findViewById<TextView>(R.id.tv_signature).text = f.signature
             row.findViewById<TextView>(R.id.tv_body).text = MathStyle.styled("= ${f.body}")
             row.setOnClickListener {

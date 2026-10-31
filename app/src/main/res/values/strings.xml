@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Qalc</string>
     <string name="formulas">Formulas</string>
     <string name="open_formulas">ƒ  Formulas</string>
     <string name="add_formula">New formula</string>

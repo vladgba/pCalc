@@ -314,7 +314,7 @@ class MainActivity : Activity() {
                 orientation = LinearLayout.VERTICAL
                 gravity = Gravity.END
                 setPadding(dpi(12), dpi(10), dpi(12), dpi(10))
-                background = roundedBg(color(R.color.bg), 12f)
+                background = roundedBg(color(R.color.card), 14f)
                 isClickable = true
                 setOnClickListener { ctl.insertResult(e.result); closeHistory() }
                 onLongPress { ctl.restore(e.expr); closeHistory() }
@@ -358,8 +358,8 @@ class MainActivity : Activity() {
         for (i in 0 until tabs.childCount) {
             val tv = tabs.getChildAt(i) as TextView
             val active = i == pager.current
-            tv.setTextColor(color(if (active) R.color.accent else R.color.text_dim))
-            tv.setTypeface(null, if (active) Typeface.BOLD else Typeface.NORMAL)
+            tv.setTextColor(color(if (active) R.color.key_fn_text else R.color.text_dim))
+            tv.typeface = if (active) Typeface.create("sans-serif-medium", Typeface.NORMAL) else Typeface.DEFAULT
             tv.background = if (active) roundedBg(color(R.color.key_fn), 50f) else null
         }
     }
@@ -377,8 +377,8 @@ class MainActivity : Activity() {
                 val (bg, fg) = when (key.kind) {
                     Kind.DIGIT -> R.color.key_digit to R.color.text
                     Kind.OP -> R.color.key_op to R.color.text
-                    Kind.FN -> R.color.key_fn to R.color.accent
-                    Kind.EQ -> R.color.accent to R.color.on_accent
+                    Kind.FN -> R.color.key_fn to R.color.key_fn_text
+                    Kind.EQ -> R.color.key_eq to R.color.on_accent
                 }
                 val onClick: () -> Unit = if (key.kind == Kind.EQ) {
                     { if (ctl.isFunctionOfX) openGraph(ctl.expr) else ctl.equals() }
@@ -406,8 +406,8 @@ class MainActivity : Activity() {
         formulasPage.setPadding(dpi(7), dpi(4), dpi(7), dpi(7))
         val cols = 2
         val items = ctl.formulas.map<Formula, View> { f -> formulaKey(f) } + listOf(
-            keyView("＋  New formula", 16f, R.color.key_fn, R.color.accent, bold = true) { openFormulas(NEW_FORMULA) },
-            keyView("Manage…", 16f, R.color.key_fn, R.color.accent, bold = true) { openFormulas(null) },
+            keyView("＋  New formula", 16f, R.color.key_fn, R.color.key_fn_text, bold = true) { openFormulas(NEW_FORMULA) },
+            keyView("Manage…", 16f, R.color.key_fn, R.color.key_fn_text, bold = true) { openFormulas(null) },
         )
         items.chunked(cols).forEach { chunk ->
             val line = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
@@ -490,7 +490,7 @@ class MainActivity : Activity() {
             textSize = sizeSp
             setTextColor(color(fgColor))
             typeface = if (bold) Typeface.create("sans-serif-medium", Typeface.NORMAL) else Typeface.DEFAULT
-            background = roundedBg(color(bgColor), 28f)
+            background = roundedBg(color(bgColor), 18f)
             isClickable = true
             isFocusable = false // keep focus (and the cursor) in the expression field
             contentDescription = label

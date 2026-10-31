@@ -33,8 +33,8 @@ class GraphActivity : Activity() {
     private val rows = ArrayList<Row>()
 
     private val palette = intArrayOf(
-        0xFF2F6FE0.toInt(), 0xFFE0452F.toInt(), 0xFF1E9E5A.toInt(),
-        0xFF9B44D6.toInt(), 0xFFE08A00.toInt(), 0xFF00A3B4.toInt(),
+        0xFF8B5CF6.toInt(), 0xFFE0452F.toInt(), 0xFF1E9E5A.toInt(),
+        0xFF2F6FE0.toInt(), 0xFFE08A00.toInt(), 0xFF00A3B4.toInt(),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

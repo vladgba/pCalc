@@ -1,4 +1,4 @@
-# Qalc
+# pCalc
 
 A simple Android calculator, with **your own formulas** as first-class keys, a function plotter and history.
 
