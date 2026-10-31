@@ -1,90 +1,37 @@
 # pCalc
 
-A simple Android calculator, with **your own formulas** as first-class keys, a function plotter and history.
-
-Written in Kotlin on the plain Android framework — **no external libraries** (no AndroidX, no Compose, no Material). The only dependency is the Kotlin standard library that the Kotlin Gradle plugin adds.
+A small Android calculator where your own formulas are keys. Type `bmi(kg, m) = kg ÷ m^2` once and it sits next to the digits from then on, together with a function plotter and a pull-down history.
 
 ## Features
 
-- **Swipeable keypad** — three full-size panels: `ƒ My formulas` ← `123` → `Functions`. The numpad is the centre page; inserting a formula or function jumps back to it.
-- **Editable expression** — tap anywhere to move the cursor or select text; keys insert at the cursor. The system keyboard never opens (copy/paste and hardware keyboards still work).
-- **Live preview** of the result while you type; `⌫` turns into `AC` after `=` or an error (long-press `⌫` always clears).
-- **Textbook powers** — `2^10` is displayed as 2¹⁰; towers like `2^3^2` stack.
-- **User formulas** — define functions and constants, call them like built-ins, reorder, edit, delete. Long-press a formula key to edit it.
-- **Graphs** — plot several `y = f(x)` curves at once; drag to pan, pinch to zoom, tap to trace values, double-tap to reset. Pressing `=` on an expression containing `x` opens the graph.
-- **History** — pull down on the display. Tap an entry to insert its result, long-press to restore its expression.
-- **DEG / RAD** toggle (graphs always use radians), light/dark theme, adaptive + themed launcher icon.
+- **Your formulas as keys.** Define functions and constants, call them like built-ins, reorder, edit or delete them. Long-press a formula key to edit it. Formulas can call each other, recursion included.
+- **Three keypad pages.** Swipe between **My formulas**, the **123** numpad and **Functions**. Inserting a formula or function jumps back to the numpad.
+- **Live result.** The answer is previewed while you type. Tap anywhere in the expression to move the cursor; the system keyboard never opens.
+- **Textbook display.** `2^10` is shown as 2¹⁰, and towers like `2^3^2` stack.
+- **Graphs.** Plot several `y = f(x)` curves at once: drag to pan, pinch to zoom, tap to trace. Pressing `=` on an expression with `x` opens the graph.
+- **History.** Pull down on the display. Tap an entry to insert its result, long-press to restore its expression.
+- **DEG / RAD** toggle, light and dark theme.
+- **No ads, no network, no data collection.**
 
-## Writing formulas
+## Permissions
 
-```
-name(param1, param2, …) = expression
-name = expression            # a named constant
-```
+pCalc requests no permissions.
 
-Examples (these are pre-loaded on first run):
+### Notes
 
-```
-hyp(a, b)   = √(a^2 + b^2)
-bmi(kg, m)  = kg ÷ m^2
-vat         = 20
-gross(net)  = net × (1 + vat%)
-fib(n)      = if(n < 2, n, fib(n − 1) + fib(n − 2))
-```
+- The formula syntax, the full list of functions and operator precedence are in the [guide](docs/GUIDE.md#writing-formulas).
+- Graphs always use radians, whatever the DEG / RAD setting.
 
-Formulas can use parameters, constants, `ans`, built-ins and **other formulas**, including recursion via the lazy `if(cond, then, else)`. Names of built-ins are reserved. One-parameter formulas get a **Plot** button (`name(x)`).
+## Build
 
-## Expression language
-
-| | |
-|---|---|
-| Operators | `+ − × ÷ ^ %` (percent = ÷100), `!` (factorial), `√` |
-| Comparisons | `< > <= >= == !=` → `1` or `0` (`=` in an expression means `==`) |
-| Constants | `π` / `pi`, `e`, `ans` (last result) |
-| Functions | `sin cos tan asin acos atan sinh cosh tanh ln log(x[, base]) exp sqrt cbrt abs floor ceil round(x[, digits]) min max mod if` |
-| Conveniences | implicit multiplication (`2π`, `3(x+1)`, `2sin(x)`), auto-closing of `(`, scientific input `1.5E−7` |
-
-Precedence, lowest to highest: comparisons → `+ −` → `× ÷` (and implicit) → unary `− √` → `^` (right-associative, `-2^2 = −4`) → postfix `% !`.
-
-Results are shown with up to 12 significant digits; very large/small values use `E` notation.
-
-## Project structure
-
-```
-app/src/main/java/x/vladgba/calc/
-├── engine/               Pure Kotlin, no Android imports
-│   ├── Lexer.kt          tokens (accepts both ASCII and × ÷ − √ π)
-│   ├── Parser.kt         recursive-descent parser → AST
-│   └── Calculator.kt     evaluator, built-ins, user formulas, formatting
-├── CalcController.kt     keypad logic, cursor handling, persisted state
-├── MainActivity.kt       calculator screen, pages, history panel
-├── FormulasActivity.kt   formula list + editor dialog
-├── GraphActivity.kt      graph screen (function list)
-├── GraphView.kt          Canvas plotter (pan / zoom / trace)
-├── PagerView.kt          minimal ViewPager replacement
-├── PullDownLayout.kt     pull-down gesture for history
-├── ExprField.kt          EditText that never shows the soft keyboard
-├── MathStyle.kt          span styling for superscript powers
-├── FormulaStore.kt / History.kt   SharedPreferences persistence (JSON)
-└── Ui.kt                 small helpers (dp, ripples, system-bar insets)
-```
-
-The `engine` package has no Android dependencies and can be reused or unit-tested on the JVM.
-
-## Building
-
-Requirements: JDK 17+, Android SDK with platform 35.
-
-Open the project in IntelliJ IDEA / Android Studio and run the `app` configuration, or from the command line:
+Requires Android 8.0+ (API 26). Built with Kotlin on the plain Android framework, without libraries.
 
 ```bash
-./gradlew assembleDebug          # app/build/outputs/apk/debug/app-debug.apk
-./gradlew assembleRelease        # minified; signed with the debug key — set your own signingConfig
+./gradlew assembleRelease
 ```
 
-- `minSdk` 26 (Android 8.0), `targetSdk` / `compileSdk` 35
-- Android Gradle Plugin 8.7.3, Kotlin 2.0.21, Gradle 8.14.3 (wrapper included)
+The APK is written to `app/build/outputs/apk/release/`.
 
 ## License
 
-[MIT](LICENSE) © 2026 vladgba
+See [LICENSE](LICENSE).
