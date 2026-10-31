@@ -1,5 +1,8 @@
 package x.vladgba.calc
 
+import x.vladgba.calc.pui.PAboutInfo
+import x.vladgba.calc.pui.showPAbout
+
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
@@ -115,6 +118,7 @@ class MainActivity : Activity() {
 
         btnAngle.setOnClickListener { ctl.toggleDegrees() }
         findViewById<Button>(R.id.btn_formulas).setOnClickListener { openFormulas(null) }
+        findViewById<View>(R.id.btn_about).setOnClickListener { showPAbout(PAboutInfo(repo = "pCalc")) }
         findViewById<Button>(R.id.btn_graph).setOnClickListener {
             openGraph(if (ctl.isFunctionOfX) ctl.expr else null)
         }

@@ -22,4 +22,5 @@ Results appear here after you press =.</string>
     <string name="history_help">Tap to insert result · long-press to restore expression</string>
     <string name="clear">Clear</string>
     <string name="plot">Plot</string>
+    <string name="about">About</string>
 </resources>
