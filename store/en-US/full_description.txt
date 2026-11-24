@@ -1,0 +1,5 @@
+Define functions and constants, calculate expressions and plot functions.
+
+A calculator with custom formula keys, graphs and calculation history.
+
+Requires Android API 26 or later.
